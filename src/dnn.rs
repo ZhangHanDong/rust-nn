@@ -179,7 +179,9 @@ impl DeepNeuralNetwork {
             // 打印 a_prev 的维度
             println!("Layer {}: a_prev shape = {:?}", l, a_prev.dim());
 
+            // 计算权重的梯度
             let dw = 1.0 / m * dz.dot(&a_prev.t());
+            // 计算偏置的梯度
             let db = 1.0 / m * dz.sum_axis(Axis(1)).insert_axis(Axis(1));
 
             // 打印 dw 和 db 的维度
@@ -189,6 +191,7 @@ impl DeepNeuralNetwork {
             grads.insert(format!("dW{}", l), dw);
             grads.insert(format!("db{}", l), db);
 
+            // 计算前一层的误差
             if l > 1 {
                 let w = self.parameters.get(&format!("W{}", l)).unwrap();
                 dz = w.t().dot(&dz)
