@@ -21,8 +21,9 @@ fn main() {
     let epochs = 2000;
     let batch_size = 64;
 
-    // 读取命令行参数
-    let optimizer_name = "sgd";
+    // TODO:读取命令行参数
+    let optimizer_name = "adam";
+    // let optimizer_name = "sgd";
 
     // 加载训练数据集
     let (training_dataset, training_labels) =
